@@ -4,17 +4,22 @@
 
 `nerdfont.txt` is a more readable version of that file
 
+`main.go` and `go.mod` are files needed for nerdfonts-cs cli tool
 
 ## Usage
 
-You will need to open the files with an editor that has a [Nerd Font](https://www.nerdfonts.com) installed for.
+You will need to run `nerdfonts-cs` inside an terminal that has a Nerd Font installed
 
-### rofi
+## Installation
 
-A simple icon picker can be built with rofi (or dmenu) and the provided nerdfont.txt file. This picker will copy the icon to the clipboard (requires xsel installed)
-
+A simple CLI tool not much better than `cat nerdfont.csv | grep debian` can be installed with golang
+```bash
+go install
 ```
-cat "nerdfont.txt" | rofi -dmenu -i | awk '{print $1}' | xsel -i -b
+
+And test with 
+```bash
+nerdfonts-cs debian
 ```
 
 ## Updating the files 
