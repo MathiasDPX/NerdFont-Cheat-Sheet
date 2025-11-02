@@ -1,25 +1,25 @@
 package main
 
 import (
+	_ "embed"
 	"encoding/csv"
 	"fmt"
 	"log"
 	"os"
 	"strings"
 	"unicode/utf8"
-	_ "embed"
 )
 
 //go:embed nerdfont.csv
 var charsCSV string
 
 func readCsvFile() [][]string {
-    reader := csv.NewReader(strings.NewReader(charsCSV))
-    records, err := reader.ReadAll()
-    if err != nil {
-        log.Fatalf("Unable to parse embedded chars.csv: %v", err)
-    }
-    return records
+	reader := csv.NewReader(strings.NewReader(charsCSV))
+	records, err := reader.ReadAll()
+	if err != nil {
+		log.Fatalf("Unable to parse embedded chars.csv: %v", err)
+	}
+	return records
 }
 
 func LeftPad(s string, n int) string {
@@ -42,14 +42,14 @@ func main() {
 	catches := [][]string{}
 	longest := 0
 	for _, record := range records {
+		record[0] = record[0][3:]
 		if strings.Contains(record[0], args[0]) {
-			name := string(record[0][3:])
+			name := string(record[0])
 
 			if utf8.RuneCountInString(name) > longest {
 				longest = utf8.RuneCountInString(name)
 			}
 
-			record[0] = record[0][3:]
 			catches = append(catches, record)
 		}
 	}
